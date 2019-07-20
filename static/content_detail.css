@@ -1,0 +1,45 @@
+.content .edit_area a button {
+    margin: 0 3px;
+}
+
+.content .detail {
+    width: 100%;
+}
+
+.content .detail .title {
+    height: 30px;
+    font-size: 20px;
+    margin: 10px 0;
+    text-align: center;
+}
+
+.content .detail .sn {
+    height: 30px;
+    margin: 5px 0;
+}
+
+.content .detail .content_type {
+    height: 30px;
+    margin: 5px 0;
+}
+
+.content .detail .content_from_name {
+    margin: 5px 0;
+}
+
+.content .detail .content_prefix {
+    margin: 5px 0;
+}
+
+.content .detail .content_origin {
+
+    margin: 5px 0;
+}
+
+.content .detail .note {
+    margin: 5px 0;
+}
+
+.content .detail .context {
+    margin: 5px 0;
+}

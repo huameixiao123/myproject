@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+
+{% block title %}
+    扩展阅读管理
+{% endblock %}
+
+{% block css %}
+    <link rel="stylesheet" href="{{ url_for("static",filename="attach_manage.css") }}">
+{% endblock %}
+
+{% block content %}
+    <div class="top">
+        <span>扩展阅读管理</span>
+        <a href="{{ url_for("book.add_attach",content_id=content_id) }}">
+            <button class="btn btn-info pull-right">添加扩展阅读</button>
+        </a>
+        <a href="{{ url_for("book.del_attach",content_id=content_id) }}">
+            <button class="btn btn-info pull-right">删除扩展阅读</button>
+        </a>
+    </div>
+
+    <div class="attach_list">
+
+        <ul>
+            {% for attach in attachs %}
+                <li>
+
+                    <div class="box">
+                        <div class="type">
+                            {% if attach.type._value_ == 1 %}
+                                扩展阅读
+                            {% elif attach.type._value_ == 2 %}
+                                词练习
+                            {% elif attach.type._value_ == 3 %}
+                                句练习
+                            {% endif %}
+                        </div>
+
+                        <div class="sn">
+                            页码&nbsp;&nbsp;&nbsp;：{{ attach.sn }}
+                        </div>
+
+                        <div class="from_name">
+                            扩展阅读转自
+                            <br>
+                            {{ attach.from_name }}
+                            <br>
+                        </div>
+                        <div class="context">
+                            内容
+                            <br>
+                            {{ attach.content }}
+                        </div>
+                        <div class="note">
+                            备注
+                            <br>
+                            {{ attach.note }}
+                        </div>
+                    </div>
+
+                    <div class="edit_content">
+                        <a href="{{ url_for("book.edit_attach",attach_id=attach.id) }}">
+                            <button class="btn btn-info">编辑扩展阅读</button>
+                        </a>
+                    </div>
+                </li>
+            {% endfor %}
+
+        </ul>
+
+    </div>
+
+
+{% endblock %}

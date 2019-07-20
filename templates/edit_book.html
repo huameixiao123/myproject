@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+
+{% block title %}
+    编辑教材
+{% endblock %}
+
+{% block css %}
+    <link rel="stylesheet" href="{{ url_for("static",filename="edit_book.css") }}">
+{% endblock %}
+
+{% block content %}
+    <span>编辑教材</span>
+    <form action="" method="post" enctype="multipart/form-data">
+        <div class="line">
+            <div class="left">
+                <span>名字</span>
+                <input type="text" name="name" value="{{ name }}">
+            </div>
+            <div class="right">
+                <span>ISBN</span>
+                <input type="text" name="isbn" value="{{ isbn }}">
+            </div>
+        </div>
+
+        <div class="line">
+            <div class="left">
+                <span>语言级别</span>
+                <input type="text" name="language_level" value="{{ language_level }}">
+            </div>
+            <div class="right">
+                <span>备注</span>
+                <input type="text" name="note" value="{{ note }}">
+            </div>
+        </div>
+        <div class="line">
+            <div class="left">
+                <span>最大词汇量</span>
+                <input type="text" name="vocleveltop" value="{{ vocleveltop }}">
+            </div>
+            <div class="right">
+                <span>最小词汇量</span>
+                <input type="text" name="voclevelbottom" value="{{ voclevelbottom }}">
+            </div>
+        </div>
+        <div class="line">
+            <div class="left">
+                <span>系列名字</span>
+                <input type="text" name="seriesname" value="{{ seriesname }}">
+            </div>
+            <div class="right">
+                <span>教材级别</span>
+                <input type="text" name="booklevel" value="{{ booklevel }}">
+            </div>
+        </div>
+
+        <div class="pic_box">
+            <div class="left_pic">
+                <span>封面图</span>
+                <img src="{{ coverimg }}" alt="">
+                <input type="file" name="coverimg" value="{{ coverimg }}">
+            </div>
+            <div class="left_pic">
+                <span>背面图</span>
+                <img src="{{ isbncoverimg }}" alt="">
+                <input type="file" name="isbncoverimg" value="{{ isbncoverimg }}">
+            </div>
+        </div>
+
+        <div class="bt">
+            <button type="submit" class="btn btn-info">保存</button>
+        </div>
+
+    </form>
+
+
+{% endblock %}

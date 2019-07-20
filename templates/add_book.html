@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+
+{% block title %}
+    添加教材
+{% endblock %}
+
+{% block css %}
+    <link rel="stylesheet" href="{{ url_for("static",filename="add_book.css") }}">
+{% endblock %}
+
+{% block content %}
+    <span>添加教材</span>
+    <form action="" method="post" enctype="multipart/form-data">
+        <div class="line">
+            <div class="left">
+                <span>名字</span>
+                <input type="text" name="name">
+            </div>
+            <div class="right">
+                <span>ISBN</span>
+                <input type="text" name="isbn">
+            </div>
+        </div>
+
+        <div class="line">
+            <div class="left">
+                <span>语言级别</span>
+                <input type="text" name="language_level">
+            </div>
+            <div class="right">
+                <span>备注</span>
+                <input type="text" name="note">
+            </div>
+        </div>
+        <div class="line">
+            <div class="left">
+                <span>最大词汇量</span>
+                <input type="text" name="vocleveltop">
+            </div>
+            <div class="right">
+                <span>最小词汇量</span>
+                <input type="text" name="voclevelbottom">
+            </div>
+        </div>
+        <div class="line">
+            <div class="left">
+                <span>系列名字</span>
+                <input type="text" name="seriesname">
+            </div>
+            <div class="right">
+                <span>教材级别</span>
+                <input type="text" name="booklevel">
+            </div>
+        </div>
+        <div class="line">
+{#            <div class="left">#}
+{#                <span>教材ID</span>#}
+{#                <input type="text" name="book_id">#}
+{#            </div>#}
+             <div class="right">
+                <span style="color: red"> {{ message }}</span>
+             </div>
+        </div>
+
+
+        <div class="pic">
+            <div class="left">
+                <span>封面图</span>
+                <input type="file" name="coverimg">
+            </div>
+            <div class="right">
+                <span>背面图</span>
+                <input type="file" name="isbncoverimg">
+            </div>
+        </div>
+        <div class="bt">
+            <button type="submit" class="btn btn-info">添加</button>
+        </div>
+
+    </form>
+
+
+{% endblock %}

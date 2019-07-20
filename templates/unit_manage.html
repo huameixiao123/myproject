@@ -1,0 +1,198 @@
+{% extends "base.html" %}
+
+{% block title %}
+    单元管理
+{% endblock %}
+
+{% block css %}
+    <link rel="stylesheet" href="{{ url_for("static",filename="unit_manage.css") }}">
+
+{% endblock %}
+{% block js %}
+
+    <script>
+        var swiper = new Swiper('.swiper-container', {
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+        });
+
+        $(function () {
+            $(".pimg").click(function () {
+                var _this = $(this);//将当前的pimg元素作为_this传入函数
+                imgShow("#outerdiv", "#innerdiv", "#bigimg", _this);
+            });
+        });
+
+        function imgShow(outerdiv, innerdiv, bigimg, _this) {
+            var src = _this.attr("src");//获取当前点击的pimg元素中的src属性
+            $(bigimg).attr("src", src);//设置#bigimg元素的src属性
+
+            /*获取当前点击图片的真实大小，并显示弹出层及大图*/
+            $("<img/>").attr("src", src).load(function () {
+                var windowW = $(window).width();//获取当前窗口宽度
+                var windowH = $(window).height();//获取当前窗口高度
+                var realWidth = this.width;//获取图片真实宽度
+                var realHeight = this.height;//获取图片真实高度
+                var imgWidth, imgHeight;
+                var scale = 0.8;//缩放尺寸，当图片真实宽度和高度大于窗口宽度和高度时进行缩放
+
+                if (realHeight > windowH * scale) {//判断图片高度
+                    imgHeight = windowH * scale;//如大于窗口高度，图片高度进行缩放
+                    imgWidth = imgHeight / realHeight * realWidth;//等比例缩放宽度
+                    if (imgWidth > windowW * scale) {//如宽度扔大于窗口宽度
+                        imgWidth = windowW * scale;//再对宽度进行缩放
+                    }
+                } else if (realWidth > windowW * scale) {//如图片高度合适，判断图片宽度
+                    imgWidth = windowW * scale;//如大于窗口宽度，图片宽度进行缩放
+                    imgHeight = imgWidth / realWidth * realHeight;//等比例缩放高度
+                } else {//如果图片真实高度和宽度都符合要求，高宽不变
+                    imgWidth = realWidth;
+                    imgHeight = realHeight;
+                }
+                $(bigimg).css("width", imgWidth);//以最终的宽度对图片缩放
+
+                var w = (windowW - imgWidth) / 2;//计算图片与窗口左边距
+                var h = (windowH - imgHeight) / 2;//计算图片与窗口上边距
+                $(innerdiv).css({"top": h, "left": w});//设置#innerdiv的top和left属性
+                $(outerdiv).fadeIn("fast");//淡入显示#outerdiv及.pimg
+            });
+
+            $(outerdiv).click(function () {//再次点击淡出消失弹出层
+                $(this).fadeOut("fast");
+            });
+        }
+    </script>
+
+
+
+
+
+
+
+{% endblock %}
+
+{% block content %}
+    <div id="outerdiv"
+         style="position:fixed;top:0;left:0;background:rgba(0,0,0,0.7);z-index:2;width:100%;height:100%;display:none;">
+        <div id="innerdiv" style="position:absolute;">
+            <img id="bigimg" style="border:5px solid #fff;" src=""/>
+        </div>
+    </div>
+
+    <div class="top">
+        <span>单元管理</span>
+        <a href="{{ url_for("book.add_unit",book_id=book_id) }}">
+            <button type="button" class="btn btn-sm btn-info pull-right add">添加单元</button>
+        </a>
+        <a href="{{ url_for("book.del_unit",book_id=book_id) }}">
+            <button type="button" class="btn btn-sm btn-info pull-right add">删除单元</button>
+        </a>
+
+    </div>
+
+    <div class="unit_list">
+
+        <ul>
+            <li class="cat com">
+                <div class="name">
+                    <span>目录</span>
+                    <a href="{{ url_for("book.add_cat_pic",book_id=book_id) }}">
+                        <button class="btn btn-info">添加目录图片</button>
+                    </a>
+                    <a href="{{ url_for("book.del_cat_pic",book_id=book_id) }}">
+                        <button class="btn btn-info">删除目录图片</button>
+                    </a>
+                </div>
+                <div class="swiper">
+                    <div class="box">
+                        <div class="swiper-container">
+                            <div class="swiper-wrapper">
+
+                                {% for cat_pic in cat_pics %}
+                                    <div class="swiper-slide">
+                                        <img src="{{ cat_pic.path }}" class="pimg" alt="">
+                                    </div>
+                                {% endfor %}
+
+
+                            </div>
+                            <!-- Add Arrows -->
+                            <div class="swiper-button-next"></div>
+                            <div class="swiper-button-prev"></div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li class="user com">
+                <div class="name">
+                    <span>前言</span>
+                    <a href="{{ url_for("book.add_user_pic",book_id=book_id) }}">
+                        <button class="btn btn-info">添加前言图片</button>
+                    </a>
+                    <a href="{{ url_for("book.del_user_pic",book_id=book_id) }}">
+                        <button class="btn btn-info">删除前言图片</button>
+                    </a>
+                </div>
+                <div class="swiper">
+                    <div class="box">
+                        <div class="swiper-container">
+                            <div class="swiper-wrapper">
+                                {% for user_pic in user_pics %}
+                                    <div class="swiper-slide">
+                                        <img src="{{ user_pic.path }}" class="pimg" alt="">
+                                    </div>
+                                {% endfor %}
+
+                            </div>
+                            <!-- Add Arrows -->
+                            <div class="swiper-button-next"></div>
+                            <div class="swiper-button-prev"></div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            {% for unit in units %}
+                <li class="unit com">
+                    <div class="name">
+                        <span>第{{ unit.unit_id }}单元</span>
+                        <span><a href="{{ url_for("book.unit_content_manage",unit_id=unit.id) }}">{{ unit.name }}</a></span>
+                        <a href="{{ url_for("book.add_unit_pic",book_id=book_id,unit_id=unit.unit_id) }}">
+                            <button class="btn btn-info">添加单元图片</button>
+                        </a>
+                        <a href="{{ url_for("book.del_unit_pic",book_id=book_id,unit_id=unit.unit_id) }}">
+                            <button class="btn btn-info">删除单元图片</button>
+                        </a>
+
+                    </div>
+
+                    <div class="swiper">
+                        <div class="box">
+                            <div class="swiper-container">
+                                <div class="swiper-wrapper">
+                                    {% for unit_pic in unit_pics %}
+                                        {% if unit.unit_id == unit_pic.refid %}
+                                            <div class="swiper-slide">
+                                                <img src="{{ unit_pic.path }}" class="pimg" alt="">
+                                            </div>
+                                        {% endif %}
+
+                                    {% endfor %}
+
+                                </div>
+                                <!-- Add Arrows -->
+                                <div class="swiper-button-next"></div>
+                                <div class="swiper-button-prev"></div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            {% endfor %}
+
+        </ul>
+
+    </div>
+
+
+{% endblock %}

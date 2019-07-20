@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block title %}
+    删除单元图片
+{% endblock %}
+
+{% block css %}
+    <link rel="stylesheet" href="{{ url_for("static",filename="del_unit_pic.css") }}">
+{% endblock %}
+
+{% block content %}
+    <div class="top">
+        <span>删除单元图片</span>
+    </div>
+
+    <form action="" method="post">
+         <ul>
+            {% for pic in pics %}
+                <li>
+                    <img src="{{ pic.path }}" alt="">
+                    <div class="input"><input type="checkbox" name="unit" value="{{ pic.id }}"></div>
+
+                </li>
+            {% endfor %}
+
+        </ul>
+        <button class="btn btn-info">提交</button>
+    </form>
+{% endblock %}

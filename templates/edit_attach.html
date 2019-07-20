@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% block title %}
+    编辑扩展阅读
+{% endblock %}
+
+{% block css %}
+    <link rel="stylesheet" href="{{ url_for("static",filename="edit_attach.css") }}">
+{% endblock %}
+
+{% block content %}
+    <div class="top">
+        <span>编辑扩展阅读</span>
+    </div>
+    <form action="" method="post" enctype="multipart/form-data">
+{#        <span class="info">扩展阅读序号</span>#}
+{#        <input type="text" name="from_name" value="{{ attach.attach_id }}">#}
+{#        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#}
+{#        {% if message.attach_id %}#}
+{#            {{ message.attach_id }}#}
+{#        {% endif %}#}
+{#        <br>#}
+        <p>内容</p>
+        <textarea name="content" id="" cols="50" rows="10">{{ attach.content }}</textarea></textarea>
+        <br>
+        <span class="info">扩展阅读转自</span>
+        <input type="text" name="from_name" value="{{ attach.content }}">
+
+        <br>
+        <span class="info">扩展阅读类型</span>
+        {% if attach.type._value_ == 1 %}
+            <input type="text" name="type" list="list" value="1">
+        {% elif attach.type._value_ == 2 %}
+            <input type="text" name="type" list="list" value="2">
+        {% elif attach.type._value_ == 3 %}
+            <input type="text" name="type" list="list" value="3">
+        {% endif %}
+
+        <datalist id="list">
+            <option value="1">扩展阅读</option>
+            <option value="2">词练习</option>
+            <option value="3">句练习</option>
+        </datalist>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        {% if message.type %}
+            {{ message.type }}
+        {% endif %}
+        <br>
+        <span class="info">扩展阅读页码</span>
+        <input type="text" name="sn" value="{{ attach.sn }}">
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        {% if message.sn %}
+            {{ message.sn }}
+        {% endif %}
+        <br>
+        <p class="info">备注</p>
+        <br>
+        <textarea name="note" id="" cols="50" rows="10">{{ attach.note }}</textarea>
+        <p></p>
+        <button class="btn btn-info">提交</button>
+    </form>
+
+
+
+
+{% endblock %}
