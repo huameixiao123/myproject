@@ -140,7 +140,7 @@ li {
 
 #main {
     width: 306px;
-    background: #fff;
+    background: rgba(0,0,0,0);
     padding: 46px 80px;
     position: relative;
     left: 50%;
@@ -200,7 +200,7 @@ li {
 
 #main h1 {
     font-size: 20px;
-    color: #555;
+    color: #FFF;
     text-align: center;
     margin: 0 auto 25px
 }

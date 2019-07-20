@@ -27,6 +27,25 @@
 
                     <div class="box">
                         <div class="type">
+                            {% if loop.index == 1 %}
+                                一、
+                            {% elif loop.index ==2 %}
+                                二、
+                                {% elif loop.index ==3 %}
+                                三、
+                                {% elif loop.index ==4 %}
+                                四、
+                                {% elif loop.index ==5 %}
+                                五、
+                                {% elif loop.index ==6 %}
+                                六、
+                                {% elif loop.index ==7 %}
+                                七、
+                                {% elif loop.index ==8 %}
+                                八、
+                                {% elif loop.index ==9 %}
+                                九、
+                            {% endif %}
                             {% if attach.type._value_ == 1 %}
                                 扩展阅读
                             {% elif attach.type._value_ == 2 %}
@@ -35,26 +54,15 @@
                                 句练习
                             {% endif %}
                         </div>
-
-                        <div class="sn">
-                            页码&nbsp;&nbsp;&nbsp;：{{ attach.sn }}
-                        </div>
-
-                        <div class="from_name">
-                            扩展阅读转自
-                            <br>
-                            {{ attach.from_name }}
-                            <br>
-                        </div>
                         <div class="context">
-                            内容
-                            <br>
                             {{ attach.content }}
                         </div>
-                        <div class="note">
-                            备注
-                            <br>
-                            {{ attach.note }}
+                        <div class="from_name">
+                            转自 |
+                            {{ attach.from_name }}
+                        </div>
+                        <div class="sn">
+                            页码&nbsp;&nbsp;&nbsp;：{{ attach.sn }}
                         </div>
                     </div>
 

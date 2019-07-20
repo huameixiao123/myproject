@@ -1,5 +1,5 @@
 .content .edit_area a button {
-    margin: 0 3px;
+    margin-left:80% ;
 }
 
 .content .detail {
@@ -15,16 +15,12 @@
 
 .content .detail .sn {
     height: 30px;
-    margin: 5px 0;
-}
-
-.content .detail .content_type {
-    height: 30px;
-    margin: 5px 0;
+    margin-left: 880px;
 }
 
 .content .detail .content_from_name {
     margin: 5px 0;
+    display: inline-block;
 }
 
 .content .detail .content_prefix {
@@ -32,14 +28,24 @@
 }
 
 .content .detail .content_origin {
-
-    margin: 5px 0;
+    display: inline-block;
+    height: 50px;
+    width: 840px;
+        line-height: 50px;
 }
 
-.content .detail .note {
-    margin: 5px 0;
+.content .detail .content_origin span{
+    font-size: 20px;
+
 }
+
+.content .detail .content_origin a{
+    text-decoration: none;
+}
+
 
 .content .detail .context {
     margin: 5px 0;
+    margin-left: 30px;
+    width: 900px;
 }

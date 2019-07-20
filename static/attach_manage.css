@@ -29,16 +29,21 @@
     font-size: 15px;
     height: 30px;
     line-height: 30px;
+    display: inline-block;
+    margin-left: 100px
 }
 
 .wrapper .content .attach_list li .from_name {
     font-size: 15px;
     margin: 10px 0;
+    display: inline-block;
+    width: 600px;
 }
 
 .wrapper .content .attach_list li .context {
     font-size: 15px;
     margin: 10px 0;
+    margin-left: 40px;
 }
 
 .wrapper .content .attach_list li .note {

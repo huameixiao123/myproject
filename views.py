@@ -24,7 +24,7 @@ def login_required(func):
 
 
 @bp.route("/del_attach/<int:content_id>", methods=["GET", "POST"])
-# @login_required
+@login_required
 def del_attach(content_id):
     if request.method == "GET":
         attachs = Attach.query.filter_by(content_id=content_id)
@@ -39,7 +39,7 @@ def del_attach(content_id):
 
 
 @bp.route("/edit_attach/<int:attach_id>/", methods=["GET", "POST"])
-# @login_required
+@login_required
 def edit_attach(attach_id):
     if request.method == "GET":
         attach = Attach.query.filter_by(id=attach_id).first()
@@ -83,7 +83,7 @@ def edit_attach(attach_id):
 
 
 @bp.route("/add_attach/<int:content_id>/", methods=["GET", "POST"])
-# @login_required
+@login_required
 def add_attach(content_id):
     if request.method == "GET":
         return render_template("add_attach.html", message=None)
@@ -116,14 +116,14 @@ def add_attach(content_id):
 
 
 @bp.route("/attach_manage/<int:content_id>/", methods=["GET"])
-# @login_required
+@login_required
 def attach_manage(content_id):
     attachs = Attach.query.filter_by(content_id=content_id).order_by("attach_id").all()
     return render_template("attach_manage.html", content_id=content_id, attachs=attachs)
 
 
 @bp.route("/del_unit_content/<int:unit_id>/", methods=["GET", "POST"])
-# @login_required
+@login_required
 def del_unit_content(unit_id):
     if request.method == "GET":
         contents = Content.query.all()
@@ -138,7 +138,7 @@ def del_unit_content(unit_id):
 
 
 @bp.route("/edit_unit_content/<int:content_id>/", methods=["GET", "POST"])
-# @login_required
+@login_required
 def edit_unit_content(content_id):
     if request.method == "GET":
         content = Content.query.filter_by(id=content_id).first()
@@ -181,7 +181,7 @@ def edit_unit_content(content_id):
 
 
 @bp.route("/add_unit_content/<int:unit_id>/", methods=["GET", "POST"])
-# @login_required
+@login_required
 def add_unit_content(unit_id):
     if request.method == "GET":
         return render_template("add_unit_content.html", errors=None)
@@ -223,7 +223,7 @@ def content_detail(content_id):
 
 
 @bp.route("/unit_content_manage/<int:unit_id>/")
-# @login_required
+@login_required
 def unit_content_manage(unit_id):
     if request.method == "GET":
         contents = Content.query.filter_by(unit_id=unit_id).order_by("content_id").all()
@@ -232,7 +232,7 @@ def unit_content_manage(unit_id):
 
 
 @bp.route("/del_unit_pic/<int:book_id>/<int:unit_id>/", methods=["GET", "POST"])
-# @login_required
+@login_required
 def del_unit_pic(book_id, unit_id):
     if request.method == "GET":
         pics = BookImage.query.filter_by(book_id=book_id, refid=unit_id, type=BookImageEnum.unit).all()
@@ -248,7 +248,7 @@ def del_unit_pic(book_id, unit_id):
 
 
 @bp.route("/add_unit_pic/<int:book_id>/<int:unit_id>/", methods=["GET", "POST"])
-# @login_required
+@login_required
 def add_unit_pic(book_id, unit_id):
     if request.method == "GET":
         return render_template("add_unit_pic.html")
@@ -271,7 +271,7 @@ def add_unit_pic(book_id, unit_id):
 
 
 @bp.route("/del_unit/<int:book_id>/", methods=["GET", "POST"])
-# @login_required
+@login_required
 def del_unit(book_id):
     if request.method == "GET":
         units = Unit.query.filter_by(book_id=book_id).all()
@@ -286,7 +286,7 @@ def del_unit(book_id):
 
 
 @bp.route("/add_unit/<int:book_id>/", methods=["GET", "POST"])
-# @login_required
+@login_required
 def add_unit(book_id):
     if request.method == "GET":
         return render_template("add_unit.html")
@@ -308,7 +308,7 @@ def add_unit(book_id):
 
 
 @bp.route("/del_user_pic/<int:book_id>/", methods=["GET", "POST"])
-# @login_required
+@login_required
 def del_user_pic(book_id):
     if request.method == "GET":
         users = db.session.query(BookImage).filter_by(book_id=book_id, type=BookImageEnum.preface).all()
@@ -323,7 +323,7 @@ def del_user_pic(book_id):
 
 
 @bp.route("/add_user_pic/<int:book_id>/", methods=["GET", "POST"])
-# @login_required
+@login_required
 def add_user_pic(book_id):
     if request.method == "GET":
         return render_template("add_user.html")
@@ -347,7 +347,7 @@ def add_user_pic(book_id):
 
 
 @bp.route("/del_cat_pic/<int:book_id>/", methods=["GET", "POST"])
-# @login_required
+@login_required
 def del_cat_pic(book_id):
     if request.method == "GET":
         cats = db.session.query(BookImage).filter_by(book_id=book_id, type=BookImageEnum.catalog).all()
@@ -363,7 +363,7 @@ def del_cat_pic(book_id):
 
 
 @bp.route("/add_cat_pic/<int:book_id>/", methods=["GET", "POST"])
-# @login_required
+@login_required
 def add_cat_pic(book_id):
     if request.method == "GET":
         return render_template("add_cat.html")
@@ -387,7 +387,7 @@ def add_cat_pic(book_id):
 
 
 @bp.route("/unit_manage/<int:book_id>/", methods=["GET"])
-# @login_required
+@login_required
 def unit_manage(book_id):
     cat_pics = db.session.query(BookImage).filter_by(refid=book_id, type=BookImageEnum.catalog).all()
     user_pics = db.session.query(BookImage).filter_by(refid=book_id, type=BookImageEnum.preface).all()
@@ -404,7 +404,7 @@ def unit_manage(book_id):
 
 
 @bp.route("/delete_book/", methods=["GET"])
-# @login_required
+@login_required
 def delete_book():
     book_id = request.args.get("book_id")
     book = Book.query.filter_by(book_id=book_id).first()
@@ -418,14 +418,14 @@ def delete_book():
 
 
 @bp.route("/book_image/<book_id>/<file_name>")
-# @login_required
+@login_required
 def get_image(book_id, file_name):
     directory = os.path.join(UPLOAD_PATH, book_id)
     return send_from_directory(directory, file_name)
 
 
 @bp.route("/book/edit/<book_id>", methods=["GET", "POST"])
-# @login_required
+@login_required
 def edit_book(book_id):
     if request.method == "GET":
         book = Book.query.filter_by(book_id=book_id).first()
@@ -487,7 +487,7 @@ def edit_book(book_id):
 
 
 @bp.route("/book/add/", methods=["GET", "POST"])
-## @login_required
+# @login_required
 def add_book():
     if request.method == "GET":
         return render_template("add_book.html")
@@ -543,13 +543,13 @@ def add_book():
 
 
 @bp.route("/index/", methods=["GET"])
-## @login_required
+# @login_required
 def index():
     return render_template("index.html")
 
 
 @bp.route("/book_list/<int:page>/", methods=["GET"])
-# @login_required
+@login_required
 def book_list(page=None):
     if not page:
         page = 1
@@ -562,7 +562,7 @@ def book_list(page=None):
 
 
 @bp.route('/logout/')
-# # @login_required
+# @login_required
 def logout():
     del session["user_id"]
     return redirect(url_for('book.login'))
