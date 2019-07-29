@@ -15,14 +15,21 @@
 
 {% block content %}
     <div class="top">
+        <div class="mianbaoxie">
+            <ul id="breadcrumb">
+                <li><a href="javascript:volid(0);"></a></li>
+                <li><a href="{{ url_for("book.book_list",page=1) }}">教材管理</a></li>
+            </ul>
+        </div>
+        <div class="anniu">
+            <a href="{{ url_for("book.add_book") }}">
+                <button type="button" class="btn btn-sm btn-info pull-right">添加教材</button>
+            </a>
+{#            <a href="{{ url_for("book.add_book") }}">#}
+{#                <button type="button" class="btn btn-sm btn-danger pull-right">删除教材</button>#}
+{#            </a>#}
+        </div>
 
-        <span>教材管理</span>
-        <a href="{{ url_for("book.add_book") }}">
-            <button type="button" class="btn btn-sm btn-info pull-right add">添加教材</button>
-        </a>
-{#        <a href="{{ url_for("book.add_book") }}">#}
-{#            <button type="button" class="btn btn-sm btn-info pull-right add">111教材</button>#}
-{#        </a>#}
     </div>
 
 

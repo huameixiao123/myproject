@@ -1,3 +1,26 @@
+.content form .contentandpic{
+    overflow: hidden;
+}
+
+.content #cke_ckeditor {
+    float: left;
+}
+
+
+
+.content .box {
+    width: 370px;
+    height: 415px;
+    float: left;
+    margin: auto 70px ;
+
+    /*background: #808080;*/
+}
+
+.content .box img {
+    width: 370px;
+    height: 415px;
+}
 
 
 .content form .error {

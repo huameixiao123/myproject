@@ -19,7 +19,6 @@ def login_required(func):
             return func(*args, **kwargs)
         else:
             return redirect(url_for('book.login'))
-
     return inner
 
 
@@ -43,17 +42,20 @@ def del_attach(content_id):
 def edit_attach(attach_id):
     if request.method == "GET":
         attach = Attach.query.filter_by(id=attach_id).first()
-        return render_template("edit_attach.html", attach=attach, message=None)
+        content = Content.query.filter_by(id=attach.content_id).first()
+        info = content.get_info()
+        unit_pics = BookImage.query.filter_by(refid=info["unit"].unit_id, book_id=info["book"].book_id).all()
+        return render_template("edit_attach.html", attach=attach, message=None,unit_pics=unit_pics)
     if request.method == "POST":
         # attach_id = request.form.get("attach_id")
         # if not attach_id:
-        #     render_template("add_attach.html", message={"attach_id": "扩展阅读序号必须填写"})
+        #     render_template("add_attach.html", message={"attach_id": "课文附件序号必须填写"})
         sn = request.form.get("sn")
         if not sn:
-            render_template("add_attach.html", message={"sn": "扩展阅读页码必须填写"})
+            render_template("add_attach.html", message={"sn": "课文附件页码必须填写"})
         type = request.form.get("type")
         if not type:
-            render_template("add_attach.html", message={"type": "扩展阅读类型必须填写"})
+            render_template("add_attach.html", message={"type": "课文附件类型必须填写"})
         if type == "1":
             type = ContentAttachEnum.kuozhanyuedu
 
@@ -62,7 +64,7 @@ def edit_attach(attach_id):
         if type == "3":
             type = ContentAttachEnum.julianxi
 
-        content = request.form.get("content")
+        content = request.form.get("ckeditor")
         note = request.form.get("note")
         from_name = request.form.get("from_name")
 
@@ -86,17 +88,20 @@ def edit_attach(attach_id):
 @login_required
 def add_attach(content_id):
     if request.method == "GET":
-        return render_template("add_attach.html", message=None)
+        content = Content.query.filter_by(id=content_id).first()
+        info = content.get_info()
+        unit_pics = BookImage.query.filter_by(refid=info["unit"].unit_id, book_id=info["book"].book_id).all()
+        return render_template("add_attach.html", message=None,unit_pics=unit_pics)
     if request.method == "POST":
         attach_id = request.form.get("attach_id")
         if not attach_id:
-            return render_template("add_attach.html", message={"attach_id": "扩展阅读序号必须填写"})
+            return render_template("add_attach.html", message={"attach_id": "课文附件序号必须填写"})
         sn = request.form.get("sn")
         if not sn:
-            return render_template("add_attach.html", message={"sn": "扩展阅读页码必须填写"})
+            return render_template("add_attach.html", message={"sn": "课文附件页码必须填写"})
         type = request.form.get("type")
         if not type:
-            return render_template("add_attach.html", message={"type": "扩展阅读类型必须填写"})
+            return render_template("add_attach.html", message={"type": "课文附件类型必须填写"})
         if type == "1":
             type = ContentAttachEnum.kuozhanyuedu
 
@@ -105,7 +110,7 @@ def add_attach(content_id):
         if type == "3":
             type = ContentAttachEnum.julianxi
 
-        content = request.form.get("content")
+        content = request.form.get("ckeditor")
         note = request.form.get("note")
         from_name = request.form.get("from_name")
         attach = Attach(content_id=content_id, sn=sn, type=type, content=content, note=note, from_name=from_name,
@@ -119,7 +124,10 @@ def add_attach(content_id):
 @login_required
 def attach_manage(content_id):
     attachs = Attach.query.filter_by(content_id=content_id).order_by("attach_id").all()
-    return render_template("attach_manage.html", content_id=content_id, attachs=attachs)
+    content = Content.query.filter_by(id=content_id).first()
+    info = content.get_info()
+    info.update({"content": content, "content_id": content_id, "attachs": attachs})
+    return render_template("attach_manage.html", **info)
 
 
 @bp.route("/del_unit_content/<int:unit_id>/", methods=["GET", "POST"])
@@ -142,12 +150,15 @@ def del_unit_content(unit_id):
 def edit_unit_content(content_id):
     if request.method == "GET":
         content = Content.query.filter_by(id=content_id).first()
-        return render_template("edit_unit_content.html", content=content, errors=None)
+        info = content.get_info()
+        unit_pics = BookImage.query.filter_by(refid=info["unit"].unit_id,book_id=info["book"].book_id).all()
+        return render_template("edit_unit_content.html", content=content, errors=None, unit_pics=unit_pics)
     if request.method == "POST":
         form = EditContentForm(request.form)
         if form.validate():
             title = request.form.get("title")
-            content = request.form.get("content")
+            print(request.form)
+            content = request.form.get("ckeditor")
             content_from_name = request.form.get("content_from_name")
             content_prefix = request.form.get("content_prefix")
             content_origin = request.form.get("content_origin")
@@ -184,7 +195,10 @@ def edit_unit_content(content_id):
 @login_required
 def add_unit_content(unit_id):
     if request.method == "GET":
-        return render_template("add_unit_content.html", errors=None)
+        unit = Unit.query.filter_by(id=unit_id).first()
+        unit_pics = BookImage.query.filter_by(book_id=unit.book_id, refid=unit.unit_id).all()
+
+        return render_template("add_unit_content.html", unit_pics=unit_pics, errors=None)
     if request.method == "POST":
         form = AddContentForm(request.form)
         if form.validate():
@@ -217,9 +231,11 @@ def add_unit_content(unit_id):
 
 
 @bp.route("/content_detail/<int:content_id>/", methods=["GET"])
+@login_required
 def content_detail(content_id):
     content = db.session.query(Content).filter_by(id=content_id).first()
-    return render_template("content_detail.html", content=content)
+    info = content.get_info()
+    return render_template("content_detail.html", content=content, **info)
 
 
 @bp.route("/unit_content_manage/<int:unit_id>/")
@@ -227,8 +243,9 @@ def content_detail(content_id):
 def unit_content_manage(unit_id):
     if request.method == "GET":
         contents = Content.query.filter_by(unit_id=unit_id).order_by("content_id").all()
-
-        return render_template("unit_content_manage.html", contents=contents, unit_id=unit_id)
+        unit = db.session.query(Unit).filter_by(id=unit_id).first()
+        info = unit.get_info()
+        return render_template("unit_content_manage.html", contents=contents, unit_id=unit_id, **info)
 
 
 @bp.route("/del_unit_pic/<int:book_id>/<int:unit_id>/", methods=["GET", "POST"])
@@ -244,7 +261,8 @@ def del_unit_pic(book_id, unit_id):
             bookimg = BookImage.query.filter_by(id=int(i)).first()
             db.session.delete(bookimg)
         db.session.commit()
-        return render_template("red_page.html", path=url_for("book.unit_manage", book_id=book_id))
+        return redirect(url_for("book.unit_manage", book_id=book_id))
+        # return render_template("red_page.html", path=url_for("book.unit_manage", book_id=book_id))
 
 
 @bp.route("/add_unit_pic/<int:book_id>/<int:unit_id>/", methods=["GET", "POST"])
@@ -299,7 +317,7 @@ def add_unit(book_id):
             return render_template("add_unit.html", message="单元页码必须填写")
         unit_id = request.form.get("unit_id")
         if not unit_id:
-            return render_template("add_unit.html", message="单元ID必须填写")
+            return render_template("add_unit.html", message="单元序号必须填写")
         note = request.form.get("note")
         unit = Unit(sn=sn, name=name, note=note, book_id=book_id, unit_id=unit_id)
         db.session.add(unit)
@@ -393,12 +411,14 @@ def unit_manage(book_id):
     user_pics = db.session.query(BookImage).filter_by(refid=book_id, type=BookImageEnum.preface).all()
     units = db.session.query(Unit).filter_by(book_id=book_id).all()
     unit_pics = db.session.query(BookImage).filter_by(type=BookImageEnum.unit, book_id=book_id).all()
+    book = db.session.query(Book).filter_by(book_id=book_id).first()
     data = {
         "book_id": book_id,
         "cat_pics": cat_pics,
         "user_pics": user_pics,
         "units": units,
-        "unit_pics": unit_pics
+        "unit_pics": unit_pics,
+        "book_name": book.name
     }
     return render_template("unit_manage.html", **data)
 

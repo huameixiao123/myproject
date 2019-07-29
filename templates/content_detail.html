@@ -10,7 +10,16 @@
 
 {% block content %}
     <div class="top">
-        <span>课文详情</span>
+        <div class="mianbaoxie">
+            <ul id="breadcrumb">
+                <li><a href="javascript:volid(0);"></a></li>
+                <li><a href="{{ url_for("book.book_list",page=1) }}">教材管理</a></li>
+                <li><a href="{{ url_for("book.unit_manage",book_id=book.book_id) }}">{{ book.name }}</a></li>
+                <li><a href="{{ url_for("book.unit_content_manage",unit_id=unit.id) }}">第{{ unit.unit_id }}单元</a></li>
+                <li><a href="">{{ content.title }}</a></li>
+            </ul>
+        </div>
+
     </div>
 
     <div class="detail">
@@ -18,18 +27,23 @@
 
         <div class="content_prefix">{{ content.content_prefix }}</div>
 
-        <div class="context">{{ content.content }}</div>
+        <div class="context">{{ content.content | safe }}</div>
 
         <div class="content_origin"><span>○&nbsp;</span>原文链接&nbsp;&nbsp;&nbsp;<a href="{{ content.content_origin }}">{{ content.content_origin }}</a></div>
 
-        <div class="content_from_name"> 转自|{{ content.content_from_name }}</div>
+        <div class="content_from_name">
+            {% if content.content_from_name %}
+                转自&nbsp;|&nbsp;{{ content.content_from_name }}
+            {% endif %}
+
+            </div>
 
         <div class="sn">页码：{{ content.sn }}</div>
 
 
         <div class="attach">
             <a href="{{ url_for("book.attach_manage",content_id=content.id) }}" style="text-decoration: none"><h5>
-                扩展阅读</h5></a>
+                课文附件</h5></a>
         </div>
     </div>
     <div class="edit_area">

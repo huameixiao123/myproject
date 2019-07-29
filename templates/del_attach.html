@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block title %}
-    删除扩展阅读
+    删除课文附件
 {% endblock %}
 
 {% block css %}
@@ -10,7 +10,7 @@
 
 {% block content %}
     <div class="top">
-        <span>删除扩展阅读</span>
+        <span>删除课文附件</span>
     </div>
 
     <form action="" method="post">
@@ -18,9 +18,9 @@
             {% for attach in attachs %}
                 <li>
                     <input type="checkbox" name="del" value="{{ attach.id}}">
-                    <span>第{{ attach.attach_id }}篇扩展阅读</span> <span>
+                    <span>第{{ attach.attach_id }}篇课文附件</span> <span>
                         {% if attach.type._value_ == 1 %}
-                            扩展阅读
+                            课文附件
                             {% elif attach.type._value_ == 2 %}
                             词练习
                             {% elif attach.type._value_ == 3 %}
@@ -33,7 +33,7 @@
         </ul>
 
         <div class="bt">
-            <button type="submit" class="btn btn-info">删除</button>
+            <button type="submit" class="btn btn-danger">删除</button>
         </div>
     </form>
 {% endblock %}

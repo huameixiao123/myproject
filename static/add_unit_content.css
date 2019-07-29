@@ -1,10 +1,29 @@
+.content form .contentandpic {
+    overflow: hidden;
+}
 
+.content #cke_ckeditor {
+    float: left;
+}
+
+.content .box {
+    width: 370px;
+    height: 415px;
+    float: left;
+    margin: auto 70px;
+
+    /*background: #808080;*/
+}
+
+.content .box img {
+    width: 370px;
+    height: 415px;
+}
 
 .content form .error {
     margin-left: 30px;
     color: red;
 }
-
 
 .content form .info {
     width: 150px;
@@ -13,9 +32,11 @@
     margin: 5px 0;
     display: inline-block;
 }
+
 .content form input {
     margin-left: 40px;
 }
-.content form button{
+
+.content form button {
     margin: 10px 150px;
 }

@@ -9,6 +9,13 @@
 {% endblock %}
 
 {% block content %}
+    <div id="outerdiv"
+         style="position:fixed;top:0;left:0;background:rgba(0,0,0,0.7);z-index:2;width:100%;height:100%;display:none;">
+        <div id="innerdiv" style="position:absolute;">
+            <img id="bigimg" style="border:5px solid #fff;" src=""/>
+        </div>
+    </div>
+
     <span>编辑教材</span>
     <form action="" method="post" enctype="multipart/form-data">
         <div class="line">
@@ -56,12 +63,12 @@
         <div class="pic_box">
             <div class="left_pic">
                 <span>封面图</span>
-                <img src="{{ coverimg }}" alt="">
+                <img src="{{ coverimg }}" class="pimg">
                 <input type="file" name="coverimg" value="{{ coverimg }}">
             </div>
             <div class="left_pic">
                 <span>背面图</span>
-                <img src="{{ isbncoverimg }}" alt="">
+                <img src="{{ isbncoverimg }}" class="pimg">
                 <input type="file" name="isbncoverimg" value="{{ isbncoverimg }}">
             </div>
         </div>

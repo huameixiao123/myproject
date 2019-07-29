@@ -10,13 +10,24 @@
 
 {% block content %}
     <div class="top">
-        <span>课文管理</span>
-        <a href="{{ url_for("book.add_unit_content",unit_id=unit_id) }}">
-            <button class="btn btn-info pull-right">添加课文</button>
-        </a>
-        <a href="{{ url_for("book.del_unit_content",unit_id=unit_id) }}">
-            <button class="btn btn-info pull-right">删除课文</button>
-        </a>
+        <div class="mianbaoxie">
+            <ul id="breadcrumb">
+                <li><a href="javascript:volid(0);"></a></li>
+                <li><a href="{{ url_for("book.book_list",page=1) }}">教材管理</a></li>
+                <li><a href="{{ url_for("book.unit_manage",book_id=book.book_id) }}">{{ book.name }}</a></li>
+                <li><a href="">第{{ unit.unit_id }}单元</a></li>
+            </ul>
+        </div>
+        <div class="anniu">
+            <a href="{{ url_for("book.add_unit_content",unit_id=unit_id) }}">
+                <button class="btn btn-info pull-right">添加课文</button>
+            </a>
+            <a href="{{ url_for("book.del_unit_content",unit_id=unit_id) }}">
+                <button class="btn btn-danger pull-right">删除课文</button>
+            </a>
+        </div>
+
+
     </div>
 
     <ul>

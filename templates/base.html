@@ -44,11 +44,12 @@
 
     </div>
 </div>
-{#<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>#}
 <script type="text/javascript" src="{{ url_for("static",filename="jquery.min.js") }}"></script>
 <script type="text/javascript" src="{{ url_for("static",filename="bootstrap.min.js") }}"></script>
 <script type="text/javascript" src="{{ url_for("static",filename="swiper.min.js") }}"></script>
 <script type="text/javascript" src="{{ url_for("static",filename="base.js") }}"></script>
+<script type="text/javascript" src="{{ url_for("static",filename="lunbo.js") }}"></script>
+<script src="{{ url_for('static', filename='ckeditor/ckeditor.js') }}"></script>
 {% block js %}
 
 {% endblock %}

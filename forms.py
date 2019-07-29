@@ -27,7 +27,7 @@ class AddBookForm(Form):
     booklevel = StringField(validators=[Length(0,50,message="最大长度是50个字符")])
 
 class AddContentForm(Form):
-    content_id = IntegerFieldBat(validators=[InputRequired("课文ID必须填写")])
+    content_id = IntegerFieldBat(validators=[InputRequired("课文序号必须填写")])
     title = StringField(validators=[Length(0,200,message="最大长度是200个字符"),InputRequired("标题必须填写")])
     content = StringField(validators=[Length(0,200,message="最大长度是200个字符")])
     content_from_name = StringField(validators=[Length(0,200,message="最大长度是200个字符")])
