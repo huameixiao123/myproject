@@ -1,0 +1,100 @@
+{% extends "base.html" %}
+
+{% block title %}
+    课文附件管理
+{% endblock %}
+
+{% block css %}
+    <link rel="stylesheet" href="{{ url_for("static",filename="attach_manage.css") }}">
+{% endblock %}
+
+{% block content %}
+    <div class="top">
+
+
+        <div class="mianbaoxie">
+            <ul id="breadcrumb">
+                <li><a href="javascript:volid(0);"></a></li>
+                <li><a href="{{ url_for("book.book_list",page=1) }}">教材管理</a></li>
+                <li><a href="{{ url_for("book.unit_manage",book_id=book.book_id) }}">{{ book.name }}</a></li>
+                <li><a href="{{ url_for("book.unit_content_manage",unit_id=unit.id) }}">第{{ unit.unit_id }}单元</a></li>
+                <li><a href="{{ url_for("book.content_detail",content_id=content.id) }}">{{ content.title }}</a></li>
+                <li><a href="javascript:volid(0);">课文附件</a></li>
+            </ul>
+        </div>
+
+        <div class="anniu">
+            <a href="{{ url_for("book.add_attach",content_id=content_id) }}">
+                <button class="btn btn-info pull-right">添加课文附件</button>
+            </a>
+            <a href="{{ url_for("book.del_attach",content_id=content_id) }}">
+                <button class="btn btn-danger pull-right">删除课文附件</button>
+            </a>
+        </div>
+
+
+    </div>
+
+    <div class="attach_list">
+
+        <ul>
+            {% for attach in attachs %}
+                <li>
+
+                    <div class="box">
+                        <div class="type">
+                            {% if loop.index == 1 %}
+                                一、
+                            {% elif loop.index ==2 %}
+                                二、
+                            {% elif loop.index ==3 %}
+                                三、
+                            {% elif loop.index ==4 %}
+                                四、
+                            {% elif loop.index ==5 %}
+                                五、
+                            {% elif loop.index ==6 %}
+                                六、
+                            {% elif loop.index ==7 %}
+                                七、
+                            {% elif loop.index ==8 %}
+                                八、
+                            {% elif loop.index ==9 %}
+                                九、
+                            {% endif %}
+                            {% if attach.type._value_ == 1 %}
+                                课文附件
+                            {% elif attach.type._value_ == 2 %}
+                                词练习
+                            {% elif attach.type._value_ == 3 %}
+                                句练习
+                            {% endif %}
+                        </div>
+                        <div class="context">
+                            <pre>{{ attach.content }}</pre>
+                        </div>
+                        <div class="from_name">
+                            {% if attach.from_name %}
+                                转自&nbsp;|&nbsp;
+                                {{ attach.from_name }}
+                            {% endif %}
+                        </div>
+                        <div class="sn">
+                            页码&nbsp;&nbsp;&nbsp;：{{ attach.sn }}
+                        </div>
+                    </div>
+
+                    <div class="edit_content">
+                        <a href="{{ url_for("book.edit_attach",attach_id=attach.id) }}">
+                            <button class="btn btn-info">编辑课文附件</button>
+                        </a>
+                    </div>
+                </li>
+            {% endfor %}
+
+        </ul>
+
+    </div>
+
+
+{% endblock %}

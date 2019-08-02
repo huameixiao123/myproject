@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+
+{% block title %}
+    教材列表
+{% endblock %}
+
+{% block css %}
+    <link rel="stylesheet" href="{{ url_for("static",filename="booklist.css") }}">
+
+{% endblock %}
+
+{% block js %}
+    <script type="text/javascript" src="{{ url_for("static",filename="booklist.js") }}"></script>
+{% endblock %}
+
+{% block content %}
+    <div class="top">
+        <div class="mianbaoxie">
+            <ul id="breadcrumb">
+                <li><a href="javascript:volid(0);"></a></li>
+                <li><a href="{{ url_for("book.book_list",page=1) }}">教材管理</a></li>
+            </ul>
+        </div>
+        <div class="anniu">
+            <a href="{{ url_for("book.add_book") }}">
+                <button type="button" class="btn btn-sm btn-info pull-right">添加教材</button>
+            </a>
+{#            <a href="{{ url_for("book.add_book") }}">#}
+{#                <button type="button" class="btn btn-sm btn-danger pull-right">删除教材</button>#}
+{#            </a>#}
+        </div>
+
+    </div>
+
+
+
+    <div class="booklist">
+        <ul id="booklist">
+            {% for book in books.items %}
+                <li data-id="{{ book.book_id }}">
+                    <a href="{{ url_for("book.unit_manage",book_id=book.book_id) }}"><img
+                            src="{{ book.coverimg }}"
+                            alt=""></a>
+                    <p><a href="{{ url_for("book.unit_manage",book_id=book.book_id) }}">{{ book.name }}</a></p>
+                    <button type="button" class="btn btn-sm btn-danger pull-right delete"> 删除教材</button>
+                    <a href="{{ url_for("book.edit_book",book_id=book.book_id) }}">
+                        <button type="button" class="btn btn-sm btn-info pull-ledt edit"> 编辑教材</button>
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div class="page">
+        <ul class="pagination">
+
+            {% for p in books.iter_pages() %}
+                {% if p %}
+                    {% if p == books.page %}
+                        <li class="active">
+                            <a href="{{ url_for("book.book_list", page = p) }}">{{ p }}</a>
+                        </li>
+                    {% else %}
+                        <li>
+                            <a href="{{ url_for("book.book_list", page = p) }}">{{ p }}</a>
+                        </li>
+                    {% endif %}
+                {% else %}
+                    <li class="disabled"><a href="#">&hellip;</a></li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %}

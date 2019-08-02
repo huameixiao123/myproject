@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block title %}
+    删除课文
+{% endblock %}
+
+{% block css %}
+    <link rel="stylesheet" href="{{ url_for("static",filename="del_unit_content.css") }}">
+{% endblock %}
+
+{% block content %}
+    <div class="top">
+        <span>删除课文</span>
+    </div>
+
+    <form action="" method="post">
+        <ul>
+            {% for content in contents %}
+                <li>
+                    <input type="checkbox" name="del" value="{{ content.content_id }}">
+                    <span>第{{ content.content_id }}篇课文</span> <span>{{ content.title }}</span>
+                </li>
+            {% endfor %}
+
+        </ul>
+
+        <div class="bt">
+            <button type="submit" class="btn btn-danger">删除</button>
+        </div>
+    </form>
+{% endblock %}

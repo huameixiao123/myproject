@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{% block title %}
+
+    {% endblock %}</title>
+
+    <link rel="stylesheet" href="{{ url_for("static",filename="base.css") }}">
+    <link rel="stylesheet" href="{{ url_for("static",filename="bootstrap.min.css") }}">
+    <link rel="stylesheet" href="{{ url_for("static",filename="myalert.css") }}">
+    <link rel="stylesheet" href="{{ url_for("static",filename="swiper.min.css") }}">
+
+    {% block css %}
+    
+    {% endblock %}
+
+
+</head>
+<body>
+<div class="head">
+    <ul>
+        <li class="left"><a class="logo" href="{{ url_for("book.index") }}">教材管理系统</a></li>
+        <li class="right"><a class="logout" href="{{ url_for("book.logout") }}">退出登录</a></li>
+    </ul>
+
+</div>
+
+<div class="wrapper">
+    <div class="sidebar">
+        <ul>
+            <li><a href="{{ url_for("book.book_list",page=1) }}"><strong>教材管理</strong></a></li>
+
+        </ul>
+    </div>
+
+    <div class="content">
+        {% block content %}
+        
+        {% endblock %}
+
+    </div>
+</div>
+<script type="text/javascript" src="{{ url_for("static",filename="jquery.min.js") }}"></script>
+<script type="text/javascript" src="{{ url_for("static",filename="bootstrap.min.js") }}"></script>
+<script type="text/javascript" src="{{ url_for("static",filename="swiper.min.js") }}"></script>
+<script type="text/javascript" src="{{ url_for("static",filename="base.js") }}"></script>
+<script type="text/javascript" src="{{ url_for("static",filename="lunbo.js") }}"></script>
+{% block js %}
+
+{% endblock %}
+</body>
+</html>

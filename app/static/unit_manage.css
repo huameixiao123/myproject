@@ -1,0 +1,72 @@
+
+.content .unit_list {
+    width: 100%;
+}
+
+.content .unit_list ul {
+}
+
+.content .unit_list ul li {
+    border: 3px solid #1ab7ea;
+    margin: 10px 0;
+    height: 305px;
+}
+
+.content .unit_list ul .com {
+    overflow: hidden;
+    /*background: #f8f8f8;*/
+}
+
+.content .unit_list ul .com .name {
+    width: 40%;
+    float: left;
+    height: 100%;
+    text-align: center;
+    line-height: 200px;
+    /*background: #0d6aad;*/
+}
+
+.content .unit_list ul .com .name span {
+    height: 30px;
+    display: block;
+    margin: 20px 0;
+    font-size: 16px;
+}
+
+.content .unit_list ul .com .name button {
+    display: inline-block;
+    margin-right: 15px;
+}
+
+.content .unit_list ul .com .swiper {
+    float: left;
+    width: 55%;
+    height: 300px;
+    text-align: center;
+    /*background: #1ab7ea;*/
+}
+
+.content .unit_list ul .com .swiper .box {
+    width: 250px;
+    height: 300px;
+    margin: 0 auto;
+    background: #808080;
+}
+
+.content .unit_list ul .com .swiper .box img {
+    width: 250px;
+    height: 300px;
+}
+
+.edit {
+    margin-left: 35%;
+}
+
+.edit button {
+
+    margin: 0 3px;
+}
+
+.unit .name a{
+    text-decoration: none;
+}

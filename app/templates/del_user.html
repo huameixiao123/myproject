@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block title %}
+    删除前言图片
+{% endblock %}
+
+{% block css %}
+    <link rel="stylesheet" href="{{ url_for("static",filename="del_user.css") }}">
+{% endblock %}
+
+{% block content %}
+
+     <div id="outerdiv"
+         style="position:fixed;top:0;left:0;background:rgba(0,0,0,0.7);z-index:2;width:100%;height:100%;display:none;">
+        <div id="innerdiv" style="position:absolute;">
+            <img id="bigimg" style="border:5px solid #fff;" src=""/>
+        </div>
+    </div>
+    <div class="top">
+        <span>删除前言图片</span>
+    </div>
+
+    <form action="" method="post" enctype="multipart/form-data">
+        <ul>
+            {% for user in users %}
+                <li>
+                    <img src="{{ user.path }}" alt="" class="pimg">
+                    <div class="input"><input type="checkbox" name="user" value="{{ user.id }}"></div>
+
+
+                </li>
+            {% endfor %}
+
+        </ul>
+        <button class="btn btn-danger">删除</button>
+    </form>
+{% endblock %}

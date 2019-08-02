@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+
+{% block title %}
+    课文详情
+{% endblock %}
+
+{% block css %}
+    <link rel="stylesheet" href="{{ url_for("static",filename="content_detail.css") }}">
+{% endblock %}
+
+{% block content %}
+    <div class="top">
+        <div class="mianbaoxie">
+            <ul id="breadcrumb">
+                <li><a href="javascript:volid(0);"></a></li>
+                <li><a href="{{ url_for("book.book_list",page=1) }}">教材管理</a></li>
+                <li><a href="{{ url_for("book.unit_manage",book_id=book.book_id) }}">{{ book.name }}</a></li>
+                <li><a href="{{ url_for("book.unit_content_manage",unit_id=unit.id) }}">第{{ unit.unit_id }}单元</a></li>
+                <li><a href="">{{ content.title }}</a></li>
+            </ul>
+        </div>
+
+    </div>
+
+    <div class="detail">
+        <div class="title">{{ content.title }}</div>
+
+        <div class="content_prefix">{{ content.content_prefix }}</div>
+
+
+        <div class="context"><pre>{{ content.content }}</pre></div>
+
+
+
+        <div class="content_origin"><span>○&nbsp;</span>原文链接&nbsp;&nbsp;&nbsp;<a
+                href="{{ content.content_origin }}">{{ content.content_origin }}</a></div>
+
+        <div class="content_from_name">
+            {% if content.content_from_name %}
+                转自&nbsp;|&nbsp;{{ content.content_from_name }}
+            {% endif %}
+
+        </div>
+
+        <div class="sn">页码：{{ content.sn }}</div>
+
+
+        <div class="attach">
+            <a href="{{ url_for("book.attach_manage",content_id=content.id) }}" style="text-decoration: none"><h5>
+                课文附件</h5></a>
+        </div>
+    </div>
+    <div class="edit_area">
+        <a href="{{ url_for("book.edit_unit_content",content_id=content.id) }}" class="edit_btn">
+            <button class="btn btn-info">编辑课文</button>
+        </a>
+
+        {#        <a href="{{ url_for("book.add_attach",content_id=content.id) }}" class="add_btn">#}
+        {#            <button class="btn btn-info pull-right">添加扩展阅读</button>#}
+        {#        </a>#}
+        {#        <a href="{{ url_for("book.del_attach",content_id=content.id) }}" class="add_btn">#}
+        {#            <button class="btn btn-info pull-right">删除扩展阅读</button>#}
+        </a>
+    </div>
+
+
+
+
+{% endblock %}

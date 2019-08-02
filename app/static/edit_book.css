@@ -1,0 +1,85 @@
+.content > span {
+    padding-bottom: 10px;
+    line-height: 70px;
+    font-size: 18px;
+    display: block;
+    font-weight: bold;
+    margin-left: 40%;
+}
+
+.line {
+    height: 40px;
+    width: 100%;
+    display: block;
+    margin: 10px 0;
+    position: relative;
+}
+
+.line img {
+    width: 180px;
+    height: 220px;
+    display: inline-block;
+}
+
+.line .left {
+    position: absolute;
+    left: 10%;
+
+}
+
+.line .right {
+    position: absolute;
+    left: 50%;
+}
+
+.line span {
+    font-size: 15px;
+    text-align: center;
+    line-height: 40px;
+    margin: 0 10px;
+    width: 120px;
+    display: inline-block;
+}
+
+.line input {
+    height: 30px;
+    margin-left: 5px;
+}
+
+
+.left_pic {
+    width: 250px;
+    text-align: center;
+    float: left;
+    margin-left: 170px;
+}
+.left_pic span {
+    display: block;
+    text-align: center;
+    font-size: 16px;
+    margin-top:5px;
+}
+
+.left_pic img{
+    width: 180px;
+    height: 220px;
+    margin: 10px 0;
+}
+
+.left_pic input {
+   margin-left: 50px;
+}
+.pic_box {
+    height: 310px;
+}
+
+.bt {
+    position: relative;
+    height: 100px;
+    width: 100%;
+}
+
+.bt button {
+    position: absolute;
+    left: 70%;
+}

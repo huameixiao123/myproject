@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block title %}
+    删除课文附件
+{% endblock %}
+
+{% block css %}
+    <link rel="stylesheet" href="{{ url_for("static",filename="del_attach.css") }}">
+{% endblock %}
+
+{% block content %}
+    <div class="top">
+        <span>删除课文附件</span>
+    </div>
+
+    <form action="" method="post">
+        <ul>
+            {% for attach in attachs %}
+                <li>
+                    <input type="checkbox" name="del" value="{{ attach.id}}">
+                    <span>第{{ attach.attach_id }}篇课文附件</span> <span>
+                        {% if attach.type._value_ == 1 %}
+                            课文附件
+                            {% elif attach.type._value_ == 2 %}
+                            词练习
+                            {% elif attach.type._value_ == 3 %}
+                            句练习
+                        {% endif %}
+                    </span>
+                </li>
+            {% endfor %}
+
+        </ul>
+
+        <div class="bt">
+            <button type="submit" class="btn btn-danger">删除</button>
+        </div>
+    </form>
+{% endblock %}

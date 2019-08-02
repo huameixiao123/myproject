@@ -1,0 +1,61 @@
+.content pre {
+    background-color: #ffffff;
+    border: 0 solid #fff;
+}
+
+.wrapper .content .attach_list {
+    width: 100%;
+}
+
+.wrapper .content .attach_list li {
+    overflow: hidden;
+    width: 100%;
+    margin: 10px 0;
+    /*background: #ededed;*/
+    position: relative;
+}
+
+.wrapper .content .attach_list li .box {
+    float: left;
+    width: 70%;
+}
+
+.wrapper .content .attach_list li .type {
+    font-size: 18px;
+    height: 30px;
+    line-height: 30px;
+}
+
+.wrapper .content .attach_list li .sn {
+    font-size: 15px;
+    height: 30px;
+    line-height: 30px;
+    display: inline-block;
+    margin-left: 100px
+}
+
+.wrapper .content .attach_list li .from_name {
+    font-size: 15px;
+    margin: 10px 0;
+    display: inline-block;
+    width: 600px;
+}
+
+.wrapper .content .attach_list li .context {
+    font-size: 15px;
+    margin: 10px 0;
+    margin-left: 40px;
+}
+
+.wrapper .content .attach_list li .note {
+    font-size: 15px;
+    margin: 10px 0;
+}
+
+.wrapper .content .attach_list li .edit_content {
+    width: 20%;
+    float: right;
+    position: absolute;
+    top: 40%;
+    right: 0
+}

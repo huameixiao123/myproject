@@ -1,0 +1,46 @@
+
+.booklist {
+    width: 100%;
+    overflow: hidden;
+    padding-left: 20px;
+}
+
+#booklist li {
+    float: left;
+    width: 200px;
+    margin: 10px 10px;
+}
+
+#booklist li P {
+    height: 30px;
+    text-align: center;
+
+}
+
+#booklist li a {
+    display: block;
+    line-height: 30px;
+    font-size: 16px;
+    text-decoration: none;
+
+}
+
+#booklist li img {
+    height: 220px;
+    width: 100%;
+}
+
+.page {
+    height: 50px;
+    width: 200px;
+    text-align: center;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.pagination {
+    width: 300px;
+    position: absolute;
+    left: 450px;
+}
+

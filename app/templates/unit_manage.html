@@ -1,0 +1,148 @@
+{% extends "base.html" %}
+
+{% block title %}
+    单元管理
+{% endblock %}
+
+{% block css %}
+    <link rel="stylesheet" href="{{ url_for("static",filename="unit_manage.css") }}">
+{% endblock %}
+
+{% block content %}
+    <div id="outerdiv"
+         style="position:fixed;top:0;left:0;background:rgba(0,0,0,0.7);z-index:2;width:100%;height:100%;display:none;">
+        <div id="innerdiv" style="position:absolute;">
+            <img id="bigimg" style="border:5px solid #fff;" src=""/>
+        </div>
+    </div>
+
+    <div class="top">
+        <div class="mianbaoxie">
+            <ul id="breadcrumb">
+                <li><a href="javascript:volid(0);"></a></li>
+                <li><a href="{{ url_for("book.book_list",page=1) }}">教材管理</a></li>
+                <li><a href="">{{ book_name }}</a></li>
+            </ul>
+        </div>
+        <div class="anniu">
+            <a href="{{ url_for("book.add_unit",book_id=book_id) }}">
+                <button type="button" class="btn btn-sm btn-info pull-right add">添加单元</button>
+            </a>
+            <a href="{{ url_for("book.del_unit",book_id=book_id) }}">
+                <button type="button" class="btn btn-sm btn-danger pull-right add">删除单元</button>
+            </a>
+        </div>
+
+    </div>
+
+    <div class="unit_list">
+
+        <ul>
+            <li class="cat com">
+                <div class="name">
+                    <span>目录</span>
+                    <a href="{{ url_for("book.add_cat_pic",book_id=book_id) }}">
+                        <button class="btn btn-info">添加目录图片</button>
+                    </a>
+                    <a href="{{ url_for("book.del_cat_pic",book_id=book_id) }}">
+                        <button class="btn btn-danger">删除目录图片</button>
+                    </a>
+                </div>
+                <div class="swiper">
+                    <div class="box">
+                        <div class="swiper-container">
+                            <div class="swiper-wrapper">
+
+                                {% for cat_pic in cat_pics %}
+                                    <div class="swiper-slide">
+                                        <img src="{{ cat_pic.path }}" class="pimg" alt="">
+                                    </div>
+                                {% endfor %}
+
+
+                            </div>
+                            <div class="swiper-pagination"></div>
+                            <!-- Add Arrows -->
+                            <div class="swiper-button-next"></div>
+                            <div class="swiper-button-prev"></div>
+                        </div>
+
+
+                    </div>
+                </div>
+
+            </li>
+            <li class="user com">
+                <div class="name">
+                    <span>前言</span>
+                    <a href="{{ url_for("book.add_user_pic",book_id=book_id) }}">
+                        <button class="btn btn-info">添加前言图片</button>
+                    </a>
+                    <a href="{{ url_for("book.del_user_pic",book_id=book_id) }}">
+                        <button class="btn btn-danger">删除前言图片</button>
+                    </a>
+                </div>
+                <div class="swiper">
+                    <div class="box">
+                        <div class="swiper-container">
+                            <div class="swiper-wrapper">
+                                {% for user_pic in user_pics %}
+                                    <div class="swiper-slide">
+                                        <img src="{{ user_pic.path }}" class="pimg" alt="">
+                                    </div>
+                                {% endfor %}
+
+                            </div>
+                            <div class="swiper-pagination"></div>
+                            <!-- Add Arrows -->
+                            <div class="swiper-button-next"></div>
+                            <div class="swiper-button-prev"></div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            {% for unit in units %}
+                <li class="unit com">
+                    <div class="name">
+                        <span>第{{ unit.unit_id }}单元</span>
+                        <span><a
+                                href="{{ url_for("book.unit_content_manage",unit_id=unit.id) }}">{{ unit.name }}</a></span>
+                        <a href="{{ url_for("book.add_unit_pic",book_id=book_id,unit_id=unit.unit_id) }}">
+                            <button class="btn btn-info">添加单元图片</button>
+                        </a>
+                        <a href="{{ url_for("book.del_unit_pic",book_id=book_id,unit_id=unit.unit_id) }}">
+                            <button class="btn btn-danger">删除单元图片</button>
+                        </a>
+
+                    </div>
+
+                    <div class="swiper">
+                        <div class="box">
+                            <div class="swiper-container">
+                                <div class="swiper-wrapper">
+                                    {% for unit_pic in unit_pics %}
+                                        {% if unit.unit_id == unit_pic.refid %}
+                                            <div class="swiper-slide">
+                                                <img src="{{ unit_pic.path }}" class="pimg" alt="">
+                                            </div>
+                                        {% endif %}
+
+                                    {% endfor %}
+
+                                </div>
+                                <div class="swiper-pagination"></div>
+                                <!-- Add Arrows -->
+                                <div class="swiper-button-next"></div>
+                                <div class="swiper-button-prev"></div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            {% endfor %}
+
+        </ul>
+
+    </div>
+
+
+{% endblock %}

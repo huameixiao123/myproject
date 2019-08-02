@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block title %}
+    添加单元图片
+{% endblock %}
+
+{% block css %}
+    <link rel="stylesheet" href="{{ url_for("static",filename="add_unit_pic.css") }}">
+{% endblock %}
+
+{% block content %}
+    <div class="top">
+        <span>添加单元图片</span>
+    </div>
+
+    <form action="" method="post" enctype="multipart/form-data">
+        <div>
+            <span>图片页码</span>
+            <input type="text" name="sn">
+        </div>
+        <input type="file" name="unit_pic" style="text-align: center;margin: 30px 0;">
+
+        <p style="margin: 5px 0;color: red;">{{ message }}</p>
+
+        <button class="btn btn-info">添加</button>
+    </form>
+{% endblock %}
