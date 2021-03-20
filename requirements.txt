@@ -35,7 +35,7 @@ imageio==2.1.2
 imageio-ffmpeg==0.3.0
 itchat==1.2.32
 itsdangerous==1.1.0
-Jinja2==2.10.1
+Jinja2==2.11.3
 kombu==3.0.37
 macholib==1.11
 Mako==1.0.13
